@@ -37,7 +37,7 @@ void listPrimes(int n)
         if (isPrime)                                                    // if the whole loop has finished without
         {                                                               // affecting the bool, its a prime
             totalprimes++;
-            printf("%d // found in %f seconds\n", i, time_elapsed);
+            printf("Prime: %d // Time: %f sec // Progress: %d/%d found\n", i, time_elapsed,totalprimes,n);
         }
 
         if (totalprimes == n)
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])                                        // argc 
         if(atoi(argv[1])!=0)
         {
             int n = atoi(argv[1]);
-            listprimes(n);
+            listPrimes(n);
         }
         else
         {
