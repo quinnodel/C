@@ -3,14 +3,6 @@
  * Date Created: Nov 17 2023
 -----------------------------------*/
 
-/**
- * --  NOTES --
- * to compile with GCC
- * gcc -o executable_name sourcefile.c
- * -Wall for ALL warnings and errors
- *
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
