@@ -18,7 +18,7 @@
 
 void listprimes(int n)
 {
-    int totalprimes = 0;                                                                   // of bytes needed per integer
+    int totalprimes = 0; // of bytes needed per integer
     bool primesFound = false;
 
     int i = 2;
@@ -30,11 +30,11 @@ void listprimes(int n)
         start = clock();
 
         bool isPrime = true;
-        for (int j = i - 1; j > 1; j--)                                                    // exclude edge cases for now
+        for (int j = i - 1; j > 1; j--) // exclude edge cases for now
         {
-            if (i % j == 0)                                                                // if the original mod the new is 0
-            {                                                                              // then even division took place, and
-                isPrime = false;                                                           // the number is not prime
+            if (i % j == 0)      // if the original mod the new is 0
+            {                    // then even division took place, and
+                isPrime = false; // the number is not prime
             }
         }
 
@@ -42,8 +42,8 @@ void listprimes(int n)
 
         time_elapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-        if (isPrime)                                                                       // if the whole loop has finished without
-        {                                                                                  // affecting the bool, its a prime
+        if (isPrime) // if the whole loop has finished without
+        {            // affecting the bool, its a prime
             totalprimes++;
             printf("%d // found in %f seconds\n", i, time_elapsed);
         }
@@ -53,16 +53,29 @@ void listprimes(int n)
             primesFound = true;
         }
 
-        i++;                                                                               // we must increment I like a for-loop
+        i++; // we must increment I like a for-loop
     }
 }
 
-int main(int argc, char *argv[])                                                          // argc = number of arguments entered
-{                                                                                         // argv[] = index into each argument of string
-    printf(" -- PRIME NUMBER FINDER -- \n");
-    printf("How many primes to find? //: ");
-    int n;
-    scanf("%d", &n);
-    listprimes(n);
+int main(int argc, char *argv[]) // argc = number of arguments entered
+{                                // argv[] = index into each argument of string
+    if (argc == 2)
+    {
+        if(atoi(argv[1])!=0)
+        {
+            int n = atoi(argv[1]);
+            listprimes(n);
+        }
+        else
+        {
+            printf("Please enter an integer as argument.\n");
+            printf("Syntax: ./primes <numberofprimes>\n");
+        }
+    }
+    else
+    {
+        printf("Incorrect number of arguments.\n");
+        printf("Syntax: ./primes <numberofprimes>\n");
+    }
     return 0;
 }
