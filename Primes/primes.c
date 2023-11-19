@@ -8,18 +8,8 @@
 #include <stdbool.h>
 #include <time.h>
 
-<<<<<<< HEAD
 
-
-void listPrimes(int n)
-=======
 // refactor the listprimes into smaller parts
-
-double measureTime(void(*func)(int), int arg)
->>>>>>> f2fb8a074aa9f39206e92aa0efc642c03a86ebc5
-{
-    
-}
 
 bool isPrimeBF(int n)
 {
