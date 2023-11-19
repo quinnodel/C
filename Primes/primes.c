@@ -10,7 +10,6 @@
 #include <stdbool.h>
 #include <time.h>
 
-// Refactor the listprimes into smaller parts
 
 bool isPrimeBF(int n) {
     bool isPrime = true;
