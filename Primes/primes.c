@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+
+
 void listPrimes(int n)
 {
     int totalprimes = 0;                                                // of bytes needed per integer
@@ -51,9 +53,7 @@ void listPrimes(int n)
 
 int main(int argc, char *argv[])                                        // argc = number of arguments entered
 {                                                                       // argv[] = index into each argument of string
-    if (argc == 2)
-    {
-        if(atoi(argv[1])!=0)                                            // atoi() casts a string to an integer
+    if(atoi(argv[1])!=0)                                            // atoi() casts a string to an integer
         {                                                               // returns 0 if it finds a char thats not a digit
             clock_t start,end;
             double total_time;
@@ -69,11 +69,5 @@ int main(int argc, char *argv[])                                        // argc 
             printf("Please enter an integer as argument.\n");
             printf("Syntax: ./primes <numberofprimes>\n");
         }
-    }
-    else
-    {
-        printf("Incorrect number of arguments.\n");
-        printf("Syntax: ./primes <numberofprimes>\n");
-    }
     return 0;
 }
