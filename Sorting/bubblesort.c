@@ -57,12 +57,6 @@ int *createRandArray(int size){
     return rand_array;
 }
 
-/*
---- NOTES ---
-- Implement error handing for arguments.
-- implement sorting algorithm
-*/
-
 int main(int argc, char *argv[]){
     int size = atoi(argv[1]);
     int *rand_array = createRandArray(size);
