@@ -3,12 +3,26 @@
 #include <time.h>
 #include <stdbool.h>
 
+/*
+TODO
+
+- implement insert() , insertHeper()
+- implement minHeapify()
+
+
+*/
+
 struct Heap{
     int* arr;
     int size;
     int capacity;
 };
 typedef struct Heap heap;
+
+void printHeap(heap* h){
+ 
+    
+}
 
 heap* createHeap(int capacity, int* nums){
     heap* minheap = (heap*)malloc(sizeof(heap));
