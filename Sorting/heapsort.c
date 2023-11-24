@@ -22,6 +22,41 @@ struct Heap
 typedef struct Heap heap;
 
 /*
+Function : extractMin()
+- returns and removes the minimum
+*/
+
+int extractMin(int size, heap *h)
+{
+    int min = h->arr[0];
+    h->arr[0] = h->arr[size - 1];
+    h->size--;
+
+    // heapifyDown()
+
+    return min;
+}
+
+/*
+Function : heapifyDown()
+*/
+
+void heapifyDown(int index, heap *h)
+{
+    int left_child_index = 2 * index + 1;
+    int right_child_index  = 2 * index + 2;
+    
+    if (h -> arr[index] < h -> arr[left_child_index])
+    {
+        int temp = h -> arr[index];
+        h -> arr[index] = h -> arr[left_child_index];
+        h -> arr[left_child_index] = temp; // LEFT OFF HERE
+        // need to handle incrementing index
+
+    }
+}
+
+/*
 Function : heapifyUp()
 - maintains the vertical structure of the min heap
 - does not maintain child node structure!
@@ -31,12 +66,12 @@ void heapifyUp(int index, heap *h)
 {
     int parent_index = (index - 1) / 2;
 
-    if (index > 0 && h -> arr[index] < h -> arr[parent_index])
+    if (index > 0 && h->arr[index] < h->arr[parent_index])
     {
-        int temp = h -> arr[index]; // store the previous value
-        
-        h -> arr[index] = h -> arr[parent_index]; // replace the current with the parent
-        h -> arr[parent_index] = temp; // replace the parent with the newer, lower value
+        int temp = h->arr[index]; // store the previous value
+
+        h->arr[index] = h->arr[parent_index]; // replace the current with the parent
+        h->arr[parent_index] = temp;          // replace the parent with the newer, lower value
 
         heapifyUp(parent_index, h);
     }
