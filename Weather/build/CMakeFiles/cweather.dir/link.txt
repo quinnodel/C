@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/cweather.dir/src/weather.c.o CMakeFiles/cweather.dir/src/cJSON.c.o -o cweather  /usr/lib/x86_64-linux-gnu/libcurl.so 

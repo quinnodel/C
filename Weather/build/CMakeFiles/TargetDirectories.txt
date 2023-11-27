@@ -1,0 +1,3 @@
+/home/quinnodel/Documents/Code/C/Weather/build/CMakeFiles/cweather.dir
+/home/quinnodel/Documents/Code/C/Weather/build/CMakeFiles/edit_cache.dir
+/home/quinnodel/Documents/Code/C/Weather/build/CMakeFiles/rebuild_cache.dir
