@@ -43,8 +43,9 @@ LatLong parseLatLong(const char *json_string)
     return latlong;
 }
 
-int main(void)
+LatLong getLocation()
 {
+    LatLong latlong = {0, 0};
     CURL *curl;
     CURLcode res;
     struct curl_slist *headers = NULL; // Declare a list to hold HTTP headers
@@ -71,12 +72,27 @@ int main(void)
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         }
 
+        LatLong latlong = parseLatLong(res);
+
+        return latlong;
+
         // Cleanup
         curl_slist_free_all(headers); // Free the header list
         curl_easy_cleanup(curl);
     }
 
     curl_global_cleanup();
+}
 
+void printLatLong(LatLong ll)
+{
+    printf("Your latitude is: %f\n", ll.latitude);
+    printf("Your longitude is: %f\n", ll.longitude);
+}
+
+int main(void)
+{
+    LatLong ll = getLocation();
+    printLatLong(ll);
     return 0;
 }
