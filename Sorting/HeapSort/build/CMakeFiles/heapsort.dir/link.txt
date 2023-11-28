@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/heapsort.dir/src/heapsort.c.o -o heapsort 
