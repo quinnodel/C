@@ -1,25 +1,46 @@
+/*---------------------
+Author : Quinn Hiaasen
+----------------------*/
+
+/*
+TODO
+- write function to parse and assemble the API request
+    so that the parseLatLong function can function
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <curl/curl.h>
 #include <cJSON.h>
 #include <string.h>
 
-// need a structure to hold the latitude and longitude data
-// need a function to parse the JSON and return the lattitude and longitude
+/*
 
+*/
 typedef struct
 {
     double latitude;
     double longitude;
 } LatLong;
 
-// now a function that returns a LatLong struct with the JSON data
+/*
 
+*/
+void printLatLong(LatLong ll)
+{
+    printf("Your latitude is: %f\n", ll.latitude);
+    printf("Your longitude is: %f\n", ll.longitude);
+}
+
+/*
+
+*/
 LatLong parseLatLong(const char *json_string)
 {
-    LatLong latlong = {0, 0}; // initialize the default struct
-
+    LatLong latlong = {0, 0};
     cJSON *json = cJSON_Parse(json_string);
+
     if (json == NULL)
     {
         const char *err_ptr = cJSON_GetErrorPtr();
@@ -28,6 +49,7 @@ LatLong parseLatLong(const char *json_string)
             fprintf(stderr, "Error before: %s\n", err_ptr);
         }
     }
+
     const cJSON *location = cJSON_GetObjectItemCaseSensitive(json, "loc");
     if (cJSON_IsString(location) && (location->valuestring != NULL))
     {
@@ -43,6 +65,9 @@ LatLong parseLatLong(const char *json_string)
     return latlong;
 }
 
+/*
+
+*/
 LatLong getLocation()
 {
     LatLong latlong = {0, 0};
@@ -55,14 +80,10 @@ LatLong getLocation()
     curl = curl_easy_init();
     if (curl)
     {
-        // Set the URL to IPinfo API endpoint
-        curl_easy_setopt(curl, CURLOPT_URL, "https://ipinfo.io/json");
+        headers = curl_slist_append(headers, "Authorization: 946421b30f902f");
 
-        // Add the Authorization header with your token
-        headers = curl_slist_append(headers, "Authorization: 946421b30f902f"); // Replace with your actual token
+        curl_easy_setopt(curl, CURLOPT_URL, "https://ipinfo.io/json"); // LibCurl documentation for help here
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-        // Direct output to stdout
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, stdout);
 
         res = curl_easy_perform(curl);
@@ -76,20 +97,16 @@ LatLong getLocation()
 
         return latlong;
 
-        // Cleanup
-        curl_slist_free_all(headers); // Free the header list
+        curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
     }
 
     curl_global_cleanup();
 }
 
-void printLatLong(LatLong ll)
-{
-    printf("Your latitude is: %f\n", ll.latitude);
-    printf("Your longitude is: %f\n", ll.longitude);
-}
-
+/*
+ENTRY POINT
+*/
 int main(void)
 {
     LatLong ll = getLocation();
