@@ -4,7 +4,8 @@ Author : Quinn Hiaasen
 
 /*
 TODO
-- write function to parse and assemble the API request
+---------------------------
+* write function to parse and assemble the API request
     so that the parseLatLong function can function
 
 */
@@ -16,7 +17,9 @@ TODO
 #include <string.h>
 
 /*
-
+Struct: LatLong
+---------------
+* contains two doubles for lat/long
 */
 typedef struct
 {
@@ -25,7 +28,9 @@ typedef struct
 } LatLong;
 
 /*
-
+Function: printLatLong()
+------------------------
+* prints latitude and longitude to console
 */
 void printLatLong(LatLong ll)
 {
@@ -34,14 +39,18 @@ void printLatLong(LatLong ll)
 }
 
 /*
-
+Function: parseLatLong()
+------------------------
+* makes use of cJSON to parse the JSON string
+* obtained in the API request
+* returns a LatLong object
 */
 LatLong parseLatLong(const char *json_string)
 {
     LatLong latlong = {0, 0};
-    cJSON *json = cJSON_Parse(json_string);
+    cJSON *json = cJSON_Parse(json_string); // returns a pointer to a cJSON object
 
-    if (json == NULL)
+    if (json == NULL) // if parse was unsuccessful
     {
         const char *err_ptr = cJSON_GetErrorPtr();
         if (err_ptr != NULL)
@@ -50,15 +59,15 @@ LatLong parseLatLong(const char *json_string)
         }
     }
 
-    const cJSON *location = cJSON_GetObjectItemCaseSensitive(json, "loc");
+    const cJSON *location = cJSON_GetObjectItemCaseSensitive(json, "loc"); // pointer to a cJSON object key/value pair
     if (cJSON_IsString(location) && (location->valuestring != NULL))
     {
-        char *token = strtok(location->valuestring, ",");
-        double latitude = atof(token);
-        token = strtok(NULL, ",");
+        char *token = strtok(location->valuestring, ","); // pointer to a char arr with the [lat,long] data?
+        double latitude = atof(token);                    // typecasting the latitude as a double, but the whole token?
+        token = strtok(NULL, ",");                        // I do not understand what's going on here
         double longitude = atof(token);
-        latlong.latitude = latitude;
-        latlong.longitude = longitude;
+        latlong.latitude = latitude;   // this, yes and I only acces the members this way because I'm not
+        latlong.longitude = longitude; // manipulate a pointer to a struct right?
     }
 
     cJSON_Delete(json);
@@ -66,7 +75,10 @@ LatLong parseLatLong(const char *json_string)
 }
 
 /*
-
+Function: getLocation()
+-----------------------
+* uses libcurl to make an API call to IPInfo
+* returns a LatLong struct containing the data
 */
 LatLong getLocation()
 {
