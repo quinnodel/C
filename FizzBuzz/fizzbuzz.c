@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
 bool isMultiple(int multiple, int factor)
 {
     bool isMultiple = false;
